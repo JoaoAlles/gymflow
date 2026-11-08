@@ -1,12 +1,14 @@
 # Visão do Produto — GymFlow
 
-## Sobre o produto
+## 1. Sobre o produto
 
 O GymFlow é um sistema web de gestão desenvolvido para academias e studios, com o objetivo de centralizar informações administrativas e operacionais em uma única plataforma.
 
 A proposta é facilitar o gerenciamento de alunos, planos, matrículas, frequência e informações financeiras, oferecendo uma visão organizada da operação.
 
-## Problema que o produto pretende resolver
+O GymFlow será desenvolvido como um SaaS (Software as a Service), permitindo que diferentes academias utilizem a mesma plataforma, mantendo seus dados e configurações independentes.
+
+## 2. Problema que o produto pretende resolver
 
 Academias que possuem uma quantidade significativa de alunos enfrentam dificuldades para organizar e acompanhar informações cadastrais, financeiras e operacionais.
 
@@ -14,7 +16,7 @@ A falta de centralização dessas informações pode dificultar o acompanhamento
 
 O GymFlow busca solucionar esses problemas por meio de uma plataforma centralizada, facilitando o acompanhamento da operação e a tomada de decisões.
 
-## Público-alvo
+## 3. Público-alvo
 
 O GymFlow será inicialmente direcionado a pequenas e médias academias e studios de treinamento.
 
@@ -24,7 +26,26 @@ Os principais usuários previstos são:
 - **Recepcionistas:** responsáveis pelo atendimento, cadastro e acompanhamento dos alunos.
 - **Professores:** responsáveis pelo acompanhamento das aulas e da frequência dos alunos.
 
-## Prioridades do produto
+## 4. Personalização por academia
+
+Cada academia deverá possuir autonomia para configurar suas informações comerciais e operacionais.
+
+Entre as configurações previstas estão:
+
+- Nome da academia e informações cadastrais.
+- Modalidades oferecidas.
+- Nomes dos planos e opções comerciais.
+- Valores e condições de contratação.
+- Duração dos contratos.
+- Periodicidade das cobranças.
+- Períodos de ausência para alertas de frequência.
+- Políticas de pausa de matrículas.
+- Políticas de inadimplência.
+- Tipos de alertas habilitados.
+
+Cada academia deverá visualizar e administrar exclusivamente seus próprios dados, alunos, matrículas, planos, cobranças e configurações.
+
+## 5. Prioridades do produto
 
 O desenvolvimento do GymFlow terá como prioridade a organização e retenção de alunos.
 
@@ -35,15 +56,15 @@ A ordem inicial de importância será:
 3. Acompanhamento de alunos inadimplentes.
 4. Acompanhamento dos indicadores financeiros.
 
-## Regras de negócio
+## 6. Regras de negócio
 
-### 1. Planos próximos do vencimento
+### 6.1. Planos próximos do vencimento
 
-Alunos com matrícula ativa cujo plano tenha vencimento previsto para os próximos 7 dias, incluindo o próprio dia do vencimento, devem ser identificados como próximos do vencimento.
+Alunos com matrícula ativa cujo contrato tenha vencimento previsto para os próximos 7 dias, incluindo o próprio dia do vencimento, devem ser identificados como próximos do vencimento.
 
 O objetivo é permitir que a academia realize o acompanhamento e entre em contato para incentivar a renovação.
 
-### 2. Baixa frequência
+### 6.2. Baixa frequência
 
 Alunos que já tenham registrado pelo menos uma presença e permaneçam sem comparecer pelo período configurado para sua modalidade devem ser identificados como alunos com baixa frequência.
 
@@ -53,15 +74,15 @@ Cada modalidade deverá possuir seu próprio período de ausência. Como referê
 - Natação: 20 dias.
 - Crossfit: 12 dias.
 
-Esses períodos poderão ser configurados futuramente pela administração.
+Esses períodos poderão ser configurados pela administração.
 
-A contagem deverá considerar cada matrícula individualmente. Caso um aluno possua mais de uma modalidade, cada uma será monitorada separadamente.
+A contagem deverá considerar cada matrícula e modalidade individualmente. Caso um aluno possua mais de uma modalidade, cada uma será monitorada separadamente.
 
 O alerta deverá identificar o aluno e a modalidade em que foi constatada a baixa frequência.
 
 O alerta permanecerá ativo enquanto não houver um novo registro de presença naquela modalidade. Ao registrar uma nova presença, o alerta será encerrado automaticamente.
 
-### 3. Alunos que nunca iniciaram
+### 6.3. Alunos que nunca iniciaram
 
 Alunos com matrícula ativa que ainda não tenham registrado nenhuma presença deverão ser monitorados separadamente dos alunos com baixa frequência.
 
@@ -71,23 +92,27 @@ O alerta permanecerá ativo até que seja registrada a primeira presença.
 
 Após a primeira presença, o aluno passará a ser acompanhado pela regra de baixa frequência.
 
-### 4. Inadimplência
+### 6.4. Inadimplência
 
-Alunos com matrícula ativa cuja data de vencimento da mensalidade tenha sido ultrapassada, sem que o pagamento correspondente tenha sido registrado, devem ser identificados como inadimplentes.
+Alunos com matrícula ativa cuja data de vencimento de uma cobrança tenha sido ultrapassada, sem que o pagamento correspondente tenha sido registrado, devem ser identificados como inadimplentes.
 
-O objetivo é permitir que a administração acompanhe os pagamentos pendentes e realize ações de cobrança.
+O controle financeiro deverá considerar cada matrícula e suas respectivas cobranças.
 
-O controle financeiro deverá considerar cada matrícula e suas respectivas cobranças, permitindo que um aluno possua pagamentos pendentes em uma modalidade e esteja em dia em outra.
+Quando um plano incluir várias modalidades, a cobrança será vinculada à matrícula inteira, e não individualmente a cada modalidade.
 
-### 5. Múltiplas matrículas por aluno
+Portanto, uma cobrança vencida poderá caracterizar inadimplência de toda a matrícula.
+
+### 6.5. Múltiplas matrículas por aluno
 
 Um aluno poderá possuir múltiplas matrículas, inclusive simultâneas.
 
-Cada matrícula deverá manter seu próprio vínculo com um plano ou modalidade, período de vigência, situação e histórico financeiro.
+Cada matrícula deverá manter seu próprio vínculo com um plano contratado, período de vigência, situação e histórico financeiro.
 
 As regras de vencimento, frequência e inadimplência deverão considerar os vínculos correspondentes, sem duplicar o cadastro do aluno.
 
-### 6. Configuração dos alertas
+Uma mesma pessoa poderá possuir, por exemplo, uma matrícula de musculação e outra de natação.
+
+### 6.6. Configuração dos alertas
 
 O GymFlow deverá permitir que a administração ative ou desative individualmente cada tipo de alerta.
 
@@ -109,3 +134,204 @@ Quando um tipo de alerta for desativado:
 - Os alertas existentes continuarão seguindo suas regras normais de encerramento.
 
 Ao reativar um tipo de alerta, o sistema deverá voltar a monitorar as condições correspondentes e gerar alertas quando aplicável.
+
+## 7. Estrutura de planos e opções comerciais
+
+### 7.1. Planos-base
+
+O GymFlow deverá trabalhar com planos-base que representem os serviços oferecidos pela academia.
+
+Cada plano-base poderá incluir uma ou várias modalidades.
+
+Exemplos:
+
+- Musculação.
+- Natação.
+- Plano Completo (Musculação, Natação e Crossfit).
+
+Os nomes e as modalidades incluídas serão definidos pela própria academia.
+
+### 7.2. Opções comerciais
+
+Cada plano-base poderá possuir diferentes opções comerciais, com condições específicas de contratação.
+
+Exemplos:
+
+- Mensal.
+- Semestral.
+- Anual.
+- Anual com pagamento à vista.
+
+Cada opção comercial deverá permitir configurar:
+
+- Duração contratual.
+- Valor total do contrato.
+- Valor e periodicidade das cobranças.
+- Condições comerciais aplicáveis.
+
+Os valores e as condições serão definidos pela academia.
+
+A duração do contrato deverá ser independente da periodicidade de cobrança.
+
+Por exemplo, um contrato anual poderá ter duração de 12 meses e cobrança mensal.
+
+### 7.3. Alterações nos planos
+
+Alterações realizadas no cadastro de um plano deverão afetar somente novas contratações.
+
+Contratos já existentes deverão preservar as condições comerciais e as modalidades contratadas no momento da contratação.
+
+O GymFlow deverá manter o histórico das condições originais de cada contratação, evitando que mudanças posteriores nos planos alterem contratos anteriores.
+
+## 8. Matrículas e contratos
+
+### 8.1. Contratação
+
+A matrícula representa o vínculo comercial entre um aluno e um plano contratado.
+
+Uma matrícula poderá incluir uma ou várias modalidades, conforme a opção comercial escolhida.
+
+Cada matrícula deverá possuir suas próprias informações de contratação, vigência, situação e histórico financeiro.
+
+### 8.2. Duração contratual e cobranças
+
+A duração do contrato e a periodicidade das cobranças deverão ser tratadas separadamente.
+
+Exemplos:
+
+- Contrato mensal com cobrança mensal.
+- Contrato semestral com cobrança mensal.
+- Contrato anual com cobrança mensal.
+- Contrato anual com pagamento único.
+
+O GymFlow deverá permitir diferentes combinações de duração e periodicidade, conforme as opções comerciais cadastradas pela academia.
+
+### 8.3. Renovações
+
+A renovação deverá manter a matrícula existente, registrando um novo período contratado em seu histórico.
+
+Cada período deverá preservar suas próprias datas de início e término e suas condições comerciais.
+
+O objetivo é manter o histórico de permanência e renovações do aluno sem criar uma nova matrícula a cada renovação.
+
+### 8.4. Pausas
+
+O GymFlow deverá permitir que uma matrícula seja pausada temporariamente.
+
+A pausa deverá preservar o vínculo existente e registrar:
+
+- Data de início da pausa.
+- Previsão de retorno.
+- Motivo da pausa.
+- Data efetiva de retorno.
+
+Cada academia poderá configurar sua política de pausas, incluindo:
+
+- Limite máximo de dias por pausa.
+- Quantidade de pausas permitidas por contrato.
+- Se as cobranças serão suspensas durante a pausa.
+- Se o vencimento contratual será prorrogado.
+
+A pausa não deverá apagar ou substituir o histórico financeiro e contratual.
+
+### 8.5. Cancelamentos e novas contratações
+
+Quando um aluno cancelar definitivamente sua matrícula, o vínculo deverá permanecer registrado como encerrado.
+
+Caso o aluno retorne após o cancelamento, deverá ser criada uma nova matrícula, mantendo o histórico da matrícula anterior.
+
+Uma pausa temporária não deverá ser tratada como cancelamento.
+
+### 8.6. Estados da matrícula
+
+A matrícula deverá permitir identificar diferentes situações, inicialmente:
+
+- Ativa.
+- Pausada.
+- Cancelada.
+- Encerrada por término contratual.
+
+A inadimplência e o bloqueio de acesso deverão ser tratados separadamente da situação contratual da matrícula.
+
+## 9. Alterações contratuais
+
+### 9.1. Alteração de serviços e condições
+
+O GymFlow deverá permitir alterações contratuais sem a necessidade de encerrar a matrícula existente.
+
+Exemplo: um aluno que possui musculação poderá adicionar natação ao contrato.
+
+Cada alteração deverá registrar:
+
+- Data de vigência da alteração.
+- Data em que a alteração foi registrada no sistema.
+- Responsável pela alteração.
+- Serviços anteriores e novos serviços contratados.
+- Valores e condições anteriores e atualizados.
+
+O histórico das condições anteriores deverá ser preservado.
+
+### 9.2. Alterações retroativas
+
+O GymFlow deverá permitir registrar alterações contratuais com data de vigência retroativa.
+
+A academia poderá configurar um limite máximo de retroatividade, tendo 30 dias como referência inicial.
+
+Alterações que ultrapassem esse limite deverão exigir permissão especial de um administrador.
+
+Toda alteração deverá preservar a data efetiva de registro, a data de vigência e o responsável pela operação.
+
+### 9.3. Cobranças decorrentes de alterações contratuais
+
+Quando uma alteração contratual modificar o valor da contratação, a academia poderá configurar a política de cobrança aplicável.
+
+As opções previstas são:
+
+- Cobrança proporcional aos dias restantes do ciclo.
+- Aplicação do novo valor somente no próximo ciclo de cobrança.
+- Cobrança imediata da diferença integral.
+
+A política aplicada deverá ser registrada no histórico da alteração contratual.
+
+Mudanças futuras nas configurações da academia não deverão modificar cobranças já registradas.
+
+## 10. Cobranças e inadimplência
+
+### 10.1. Cobranças
+
+Cada matrícula deverá possuir seu próprio histórico de cobranças.
+
+Cada cobrança deverá registrar informações como:
+
+- Valor.
+- Data de vencimento.
+- Data de pagamento, quando aplicável.
+- Situação do pagamento.
+- Período de referência.
+
+O histórico de cobranças e pagamentos deverá ser preservado.
+
+### 10.2. Consequências da inadimplência
+
+A identificação de inadimplência não deverá significar cancelamento automático da matrícula.
+
+Cada academia poderá configurar suas políticas de inadimplência, incluindo:
+
+- Quantidade de dias de atraso para bloquear o acesso.
+- Se o bloqueio será aplicado a todas as modalidades ou somente a algumas.
+- Quantidade de dias de atraso para permitir o cancelamento.
+- Se o cancelamento será automático ou dependerá de uma ação administrativa.
+
+O bloqueio de acesso, a inadimplência e o cancelamento contratual deverão ser tratados como situações distintas.
+
+Nenhuma dessas operações deverá apagar o histórico financeiro ou contratual do aluno.
+
+## 11. Diretrizes de histórico e rastreabilidade
+
+O GymFlow deverá preservar o histórico das operações importantes realizadas no sistema.
+
+Alterações contratuais, renovações, pausas, cancelamentos, cobranças e pagamentos deverão manter seus registros históricos.
+
+Sempre que aplicável, as operações deverão identificar o responsável e as datas de ocorrência e registro.
+
+O objetivo é permitir consultas futuras, auditorias e relatórios confiáveis, sem perda de informações anteriores.
