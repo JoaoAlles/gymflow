@@ -40,3 +40,5 @@ A ordem inicial de importância será:
 1. Alunos ativos cujo plano tenha vencimento previsto para os próximos 7 dias, incluindo o próprio dia do vencimento, devem ser identificados como próximos do vencimento. O objetivo é permitir que a academia realize o acompanhamento e entre em contato para incentivar a renovação.
 
 2. Alunos com matrícula ativa que permaneçam 10 dias consecutivos ou mais sem registrar uma entrada na academia devem ser identificados como alunos com baixa frequência. O objetivo é permitir que a administração identifique possíveis riscos de cancelamento e realize um contato preventivo.
+
+3. Alunos com matrícula ativa cuja data de vencimento da mensalidade tenha sido ultrapassada, sem que o pagamento tenha sido registrado, devem ser identificados como inadimplentes. O objetivo é permitir que a administração acompanhe os pagamentos pendentes e realize ações de cobrança.
