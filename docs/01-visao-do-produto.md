@@ -335,3 +335,140 @@ Alterações contratuais, renovações, pausas, cancelamentos, cobranças e paga
 Sempre que aplicável, as operações deverão identificar o responsável e as datas de ocorrência e registro.
 
 O objetivo é permitir consultas futuras, auditorias e relatórios confiáveis, sem perda de informações anteriores.
+
+## 12. Usuários, permissões e segurança
+
+### 12.1. Acesso a múltiplas academias
+
+- Um mesmo usuário poderá acessar várias academias utilizando uma única conta.
+- Cada usuário terá um vínculo independente com cada academia.
+- Cada vínculo poderá possuir diferentes perfis de acesso.
+- As permissões serão determinadas pelos perfis atribuídos em cada academia.
+
+### 12.2. Seleção da academia após o login
+
+- Após autenticar o usuário, o sistema deverá consultar suas academias com acesso ativo.
+- Se houver apenas uma academia, o acesso será direcionado automaticamente.
+- Se houver mais de uma academia, o sistema deverá apresentar uma tela de seleção.
+- Somente academias com vínculo ativo serão exibidas.
+- O usuário poderá trocar de academia posteriormente, sem precisar realizar logout.
+- As permissões deverão ser carregadas conforme a academia selecionada.
+
+### 12.3. Perfis de acesso
+
+A primeira versão utilizará perfis predefinidos:
+
+- **Administrador:** acesso administrativo completo à própria academia.
+- **Recepcionista:** gerenciamento operacional de alunos, matrículas, pagamentos e frequência.
+- **Professor:** acesso limitado às atividades, turmas, modalidades e alunos sob sua responsabilidade.
+
+Um usuário poderá possuir mais de um perfil na mesma academia.
+
+As permissões serão combinadas conforme os perfis atribuídos.
+
+A personalização de permissões ficará para uma evolução futura.
+
+### 12.4. Convites de usuários
+
+- O administrador poderá convidar funcionários informando o e-mail e selecionando os perfis de acesso.
+- Se o e-mail não possuir uma conta, o convidado deverá criar sua conta e senha.
+- Se já possuir uma conta, poderá aceitar o vínculo com a nova academia utilizando a conta existente.
+- O acesso somente será liberado após a aceitação do convite.
+- Convites poderão ter os estados pendente, aceito ou expirado.
+- O administrador poderá reenviar ou cancelar convites.
+
+### 12.5. Remoção e desativação de acessos
+
+- O administrador poderá desativar o vínculo de um usuário com sua academia.
+- A desativação deverá retirar imediatamente o acesso àquela academia.
+- A conta global do usuário permanecerá ativa.
+- Os acessos do usuário a outras academias não serão afetados.
+- Os registros históricos associados ao usuário deverão ser preservados.
+- A remoção de acesso não deverá provocar exclusão física dos registros relacionados.
+
+### 12.6. Alteração de permissões
+
+Somente administradores da respectiva academia poderão:
+
+- Enviar e cancelar convites.
+- Adicionar ou remover perfis.
+- Desativar ou reativar vínculos.
+- Consultar os usuários vinculados à academia.
+
+Todas essas operações deverão gerar registros na auditoria.
+
+### 12.7. Proteção do último administrador
+
+Cada academia deverá possuir pelo menos um administrador ativo.
+
+O sistema deverá impedir:
+
+- Desativação do último administrador.
+- Remoção do perfil de administrador do último usuário que o possui.
+- Exclusão do vínculo do último administrador.
+- Qualquer operação que deixe a academia sem administrador ativo.
+
+Outro usuário deverá ser promovido a administrador antes da realização dessas operações.
+
+### 12.8. Recuperação administrativa
+
+Caso uma academia perca o acesso ao seu único administrador, deverá existir um procedimento de recuperação controlado pela administração geral do GymFlow.
+
+O procedimento deverá:
+
+- Exigir solicitação formal.
+- Validar a identidade e a legitimidade do solicitante.
+- Permitir recuperação ou transferência do acesso administrativo após aprovação.
+- Registrar todas as etapas na auditoria.
+
+### 12.9. Administração geral do GymFlow
+
+A plataforma terá um nível administrativo independente, denominado **Superadministrador GymFlow**.
+
+Esse perfil será responsável por:
+
+- Cadastrar, suspender e reativar academias.
+- Gerenciar a administração geral da plataforma.
+- Prestar suporte técnico.
+- Realizar procedimentos de recuperação administrativa.
+- Gerenciar questões de segurança.
+- Consultar informações necessárias para auditoria e suporte.
+
+O superadministrador não dependerá dos perfis administrativos das academias.
+
+Seu acesso a informações das academias deverá respeitar controles de segurança, justificativa e auditoria.
+
+### 12.10. Acesso para suporte técnico
+
+Quando um superadministrador precisar acessar uma academia para prestar suporte:
+
+- Deverá informar o motivo do acesso.
+- Deverá identificar a academia envolvida.
+- O sistema deverá identificar o superadministrador responsável.
+- Deverá registrar o início e o término do acesso.
+- Todas as ações realizadas deverão ser registradas na auditoria.
+
+### 12.11. Auditoria e preservação histórica
+
+O GymFlow terá um sistema centralizado de auditoria.
+
+As operações relevantes deverão registrar:
+
+- Usuário responsável.
+- Academia relacionada.
+- Ação realizada.
+- Registro afetado.
+- Data e horário.
+- Valores anteriores e posteriores, quando aplicável.
+
+A auditoria deverá contemplar alterações cadastrais, financeiras, administrativas, contratuais, permissões, acessos e tratamento de alertas.
+
+Regras de acesso:
+
+- Administradores poderão consultar a auditoria completa de sua própria academia.
+- Recepcionistas e professores não terão acesso à auditoria completa.
+- Superadministradores poderão consultar a auditoria global para suporte e segurança.
+
+Os registros de auditoria não poderão ser alterados ou excluídos por administradores comuns.
+
+A remoção de usuários não poderá apagar ou comprometer os registros históricos de suas ações.
