@@ -472,3 +472,85 @@ Regras de acesso:
 Os registros de auditoria não poderão ser alterados ou excluídos por administradores comuns.
 
 A remoção de usuários não poderá apagar ou comprometer os registros históricos de suas ações.
+
+## 13. Cadastro e gerenciamento de alunos
+
+### 13.1. Independência entre academias
+
+- Cada academia terá seus próprios cadastros de alunos.
+- Não haverá compartilhamento de identidade ou histórico de alunos entre academias.
+- O mesmo CPF poderá existir em academias diferentes.
+- Dados pessoais, matrículas, pagamentos, frequência e histórico serão independentes por academia.
+
+### 13.2. Dados cadastrais
+
+O cadastro inicial do aluno terá os seguintes campos:
+
+| Campo              | Obrigatoriedade |
+| Nome completo      | Obrigatório |
+| CPF                | Obrigatório |
+| Data de nascimento | Obrigatório |
+| Telefone           | Obrigatório |
+| E-mail             | Opcional |
+| Endereço           | Opcional |
+| Foto               | Opcional |
+
+### 13.3. Validação do CPF
+
+- O CPF deverá possuir 11 dígitos.
+- O sistema deverá validar matematicamente os dígitos verificadores.
+- O CPF deverá ser único dentro de cada academia.
+- O sistema deverá impedir cadastros duplicados na mesma academia.
+- O mesmo CPF poderá existir em academias diferentes.
+- A alteração do CPF deverá respeitar a regra de unicidade.
+
+A validação deverá existir no frontend, backend e banco de dados.
+
+### 13.4. Situação cadastral
+
+O cadastro do aluno terá os seguintes estados:
+
+- **Ativo:** cadastro disponível para operações normais.
+- **Inativo:** cadastro preservado, mas sem utilização operacional normal.
+- **Arquivado:** cadastro preservado para consulta histórica, sem utilização em novas operações.
+
+A situação cadastral será independente da situação das matrículas.
+
+Um aluno poderá possuir um cadastro ativo mesmo sem matrículas ativas.
+
+Não será permitido arquivar um aluno enquanto possuir matrículas ativas ou pausadas. Essas matrículas deverão ser encerradas ou canceladas previamente.
+
+### 13.5. Responsáveis e dependentes
+
+O GymFlow permitirá cadastrar responsáveis e dependentes.
+
+- Cada pessoa terá seu próprio cadastro e CPF.
+- Um responsável poderá possuir vários dependentes.
+- Cada dependente poderá possuir suas próprias matrículas.
+- Frequência, alertas e histórico serão individuais.
+- O responsável poderá assumir pagamentos de matrículas dos dependentes.
+- A inativação ou remoção do responsável não poderá apagar os registros dos dependentes.
+
+### 13.6. Responsabilidade financeira
+
+Cada matrícula poderá possuir seu próprio responsável financeiro.
+
+- Um responsável poderá pagar matrículas de diferentes alunos.
+- Um aluno poderá possuir responsáveis financeiros diferentes em matrículas distintas.
+- A responsabilidade financeira não altera a titularidade da matrícula.
+- Cobranças, pagamentos e inadimplência permanecerão vinculados à matrícula correspondente.
+- Alterações do responsável financeiro deverão gerar histórico e auditoria.
+
+### 13.7. Responsável legal
+
+O cadastro permitirá identificar o responsável legal do aluno, quando aplicável.
+
+O responsável legal poderá ser diferente do responsável financeiro.
+
+### 13.8. Contatos autorizados
+
+O cadastro permitirá vincular pessoas autorizadas pela academia a determinadas ações relacionadas ao aluno.
+
+Os contatos autorizados poderão ser diferentes dos responsáveis legais e financeiros.
+
+As permissões e os tipos de autorização serão definidos em uma etapa posterior da modelagem.
