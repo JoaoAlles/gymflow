@@ -528,29 +528,152 @@ O GymFlow permitirá cadastrar responsáveis e dependentes.
 - Um responsável poderá possuir vários dependentes.
 - Cada dependente poderá possuir suas próprias matrículas.
 - Frequência, alertas e histórico serão individuais.
-- O responsável poderá assumir pagamentos de matrículas dos dependentes.
+- O responsável poderá assumir pagamentos das matrículas dos dependentes.
 - A inativação ou remoção do responsável não poderá apagar os registros dos dependentes.
 
 ### 13.6. Responsabilidade financeira
 
-Cada matrícula poderá possuir seu próprio responsável financeiro.
+Cada matrícula terá um único responsável financeiro.
 
+- O responsável poderá ser o próprio aluno.
 - Um responsável poderá pagar matrículas de diferentes alunos.
 - Um aluno poderá possuir responsáveis financeiros diferentes em matrículas distintas.
 - A responsabilidade financeira não altera a titularidade da matrícula.
 - Cobranças, pagamentos e inadimplência permanecerão vinculados à matrícula correspondente.
-- Alterações do responsável financeiro deverão gerar histórico e auditoria.
+- A alteração do responsável financeiro será permitida e deverá gerar histórico e auditoria.
+- Não haverá divisão de cobranças entre responsáveis na primeira versão.
+- A possibilidade de múltiplos responsáveis financeiros ficará para uma evolução futura.
 
 ### 13.7. Responsável legal
 
-O cadastro permitirá identificar o responsável legal do aluno, quando aplicável.
+O cadastro permitirá identificar um ou mais responsáveis legais, quando aplicável.
 
-O responsável legal poderá ser diferente do responsável financeiro.
+- Menores de 18 anos deverão possuir pelo menos um responsável legal cadastrado.
+- Maiores de 18 anos poderão possuir responsáveis legais, mas o cadastro será opcional.
+- O cadastro de um segundo responsável legal também será opcional.
+- Todos os responsáveis legais ativos receberão as comunicações não financeiras destinadas aos responsáveis.
+- A remoção de um responsável não apagará o histórico dos vínculos e comunicações anteriores.
 
-### 13.8. Contatos autorizados
+### 13.8. Contatos autorizados e comunicações
 
-O cadastro permitirá vincular pessoas autorizadas pela academia a determinadas ações relacionadas ao aluno.
+As comunicações serão direcionadas conforme a natureza da informação.
 
-Os contatos autorizados poderão ser diferentes dos responsáveis legais e financeiros.
+**Comunicações financeiras:**
+- Mensalidades e cobranças.
+- Pagamentos confirmados.
+- Inadimplência.
+- Reajustes e alterações financeiras.
 
-As permissões e os tipos de autorização serão definidos em uma etapa posterior da modelagem.
+Essas comunicações serão destinadas ao responsável financeiro.
+
+**Comunicações não financeiras:**
+- Frequência e ausências.
+- Alertas de baixa frequência.
+- Comunicados da academia.
+- Emergências.
+- Informações sobre atividades.
+
+Para menores de 18 anos, serão destinadas aos responsáveis legais. Para maiores de 18 anos, serão destinadas diretamente ao aluno.
+
+Se a mesma pessoa exercer as funções de responsável legal e financeiro, receberá ambas as categorias.
+
+Quando um aluno maior de idade não possuir responsável financeiro, as comunicações financeiras serão destinadas a ele.
+
+Quando um menor não possuir responsável legal cadastrado, o sistema deverá sinalizar a pendência para a academia.
+
+Contatos autorizados poderão ser cadastrados para situações específicas, como retirada de menores, conforme regras que serão detalhadas posteriormente.
+
+### 13.9. Transição para maioridade
+
+Quando o aluno completar 18 anos:
+
+- As comunicações não financeiras passarão automaticamente a ser destinadas ao próprio aluno.
+- Os responsáveis legais deixarão de receber essas comunicações automaticamente.
+- O responsável financeiro permanecerá vinculado até que seja alterado.
+- A academia receberá uma notificação para revisar os dados dos responsáveis.
+- O histórico dos vínculos e comunicações anteriores será preservado.
+- A transição não modificará contratos, matrículas ou cobranças existentes.
+
+### 13.10. Documentos e autorizações
+
+O GymFlow terá um módulo de documentos e autorizações dos alunos.
+
+Cada documento poderá possuir:
+
+- Nome e tipo do documento.
+- Arquivo anexado.
+- Data de emissão.
+- Data de validade, quando aplicável.
+- Status: válido, pendente, vencido ou dispensado.
+- Responsável pelo envio.
+- Histórico de alterações e versões.
+
+Exemplos:
+
+- Atestado médico.
+- Termo de responsabilidade.
+- Autorização para prática de atividades físicas.
+- Autorização dos responsáveis para menores.
+
+### 13.11. Exigências documentais por academia e modalidade
+
+- Cada academia poderá configurar suas próprias exigências documentais.
+- As exigências poderão variar conforme a modalidade.
+- Um documento poderá ser obrigatório ou opcional.
+- Poderá existir prazo de validade.
+- Alterações nas exigências não apagarão documentos ou históricos anteriores.
+
+Um mesmo documento poderá atender às exigências de várias modalidades da mesma academia, desde que cumpra os requisitos de cada uma.
+
+A validade será controlada pelo documento original. Quando ele vencer, todas as modalidades que dependem dele deverão ser sinalizadas.
+
+A substituição do arquivo deverá preservar o histórico da versão anterior.
+
+### 13.12. Comportamento diante de documentos pendentes ou vencidos
+
+Cada academia poderá configurar o comportamento de cada exigência documental:
+
+1. Apenas alertar sobre a pendência.
+2. Impedir novas matrículas até a regularização.
+3. Impedir a frequência na modalidade relacionada até a regularização.
+
+O bloqueio deverá afetar somente as modalidades que exigem o documento, não necessariamente todas as atividades do aluno.
+
+O sistema deverá manter histórico dos bloqueios, regularizações e alterações das regras.
+
+### 13.13. Permissões para documentos
+
+- **Administrador:** configura exigências, gerencia e consulta todos os documentos.
+- **Recepcionista:** cadastra, envia, atualiza e consulta documentos completos.
+- **Professor:** consulta somente a situação documental dos alunos vinculados às suas atividades.
+
+Professores não poderão abrir arquivos pessoais, como atestados médicos e outros documentos completos.
+
+Operações relevantes envolvendo documentos deverão ser registradas na auditoria.
+
+### 13.14. Armazenamento e segurança documental
+
+- Os arquivos serão armazenados de forma privada, sem links públicos.
+- O acesso será validado pelo sistema conforme as permissões do usuário.
+- O banco de dados armazenará metadados e referências aos arquivos, não o conteúdo binário.
+- Visualizações e downloads exigirão autorização.
+- Substituições e exclusões deverão preservar o histórico necessário.
+- O acesso aos documentos deverá ser rastreável pela auditoria.
+- O sistema deverá validar formato, tamanho e segurança dos arquivos enviados.
+
+### 13.15. Histórico cadastral
+
+Alterações nos dados pessoais do aluno deverão preservar o histórico dos valores anteriores.
+
+O sistema deverá registrar:
+
+- Campo alterado.
+- Valor anterior.
+- Novo valor.
+- Usuário responsável pela alteração.
+- Academia relacionada.
+- Data e horário da alteração.
+
+O histórico deverá permitir consultar alterações anteriores e identificar quem realizou cada operação.
+
+A preservação histórica deverá respeitar as regras de segurança, privacidade e retenção de dados aplicáveis.
