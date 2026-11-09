@@ -677,3 +677,220 @@ O sistema deverá registrar:
 O histórico deverá permitir consultar alterações anteriores e identificar quem realizou cada operação.
 
 A preservação histórica deverá respeitar as regras de segurança, privacidade e retenção de dados aplicáveis.
+
+## 14. Matrículas e contratos
+
+### 14.1 Datas da matrícula
+
+Toda matrícula deverá possuir três datas independentes:
+
+- **Data da contratação:** data em que a venda e a contratação foram realizadas.
+- **Data de início:** data em que começa a vigência do contrato e o aluno passa a ter direito de utilizar os serviços contratados.
+- **Data de término:** calculada com base na duração contratual e na data de início.
+
+O sistema deverá permitir que a data de início seja posterior à data da contratação.
+
+Exemplo:
+- Contratação: 08/11/2026.
+- Início da vigência: 01/12/2026.
+- Término: 30/11/2027, considerando um contrato de 12 meses.
+
+Matrículas com início futuro deverão permanecer registradas no sistema, mas não poderão liberar frequência antes do início da vigência.
+
+### 14.2 Status de matrícula agendada
+
+Quando a data de início for futura, a matrícula deverá receber o status **Agendada**.
+
+A matrícula agendada:
+- Já estará vinculada ao aluno e ao plano contratado.
+- Deverá aparecer nas consultas e relatórios administrativos.
+- Não permitirá registro de frequência antes do início da vigência.
+- Passará automaticamente para o status Ativa na data de início, desde que não exista outra condição que impeça sua ativação.
+
+O status Agendada não deverá ser confundido com matrícula Pausada ou Inativa.
+
+### 14.3 Regra de início da cobrança
+
+Cada academia poderá configurar quando a primeira cobrança de uma matrícula deverá ser gerada:
+
+- **Na contratação:** a primeira cobrança será gerada na data da contratação, mesmo que o início da vigência seja futuro.
+- **No início da vigência:** a primeira cobrança será gerada quando o contrato começar.
+
+A regra selecionada deverá ser registrada na matrícula e preservada durante todo o histórico contratual.
+
+Alterações futuras nas configurações da academia não deverão modificar as condições de cobrança de matrículas já contratadas.
+
+### 14.4 Dia de vencimento das cobranças
+
+Cada matrícula poderá utilizar uma das seguintes regras de vencimento:
+
+- **Baseado na data de início:** o vencimento mensal ocorrerá no mesmo dia em que a matrícula iniciou sua vigência.
+- **Dia fixo da academia:** o vencimento ocorrerá em um dia específico definido pela academia, podendo variar entre matrículas.
+
+A regra e o dia de vencimento escolhidos deverão ser registrados nas condições financeiras da matrícula.
+
+Alterações futuras nas configurações da academia não deverão modificar automaticamente as condições de matrículas existentes.
+
+### 14.5 Primeiro período de cobrança
+
+Quando a data de início da matrícula não coincidir com o dia de vencimento definido, a academia poderá configurar como será realizada a primeira cobrança:
+
+- **Cobrança proporcional:** o sistema calculará o valor proporcional aos dias entre o início da vigência e o próximo vencimento.
+- **Cobrança integral:** será cobrado o valor mensal completo, independentemente da quantidade de dias do primeiro período.
+
+A regra aplicada deverá ser registrada na matrícula e preservada no histórico financeiro.
+
+Alterações futuras nas configurações da academia não deverão modificar cobranças já geradas ou condições financeiras de matrículas existentes.
+
+### 14.6 Vencimento em dias inexistentes no mês
+
+Quando o dia de vencimento configurado não existir em determinado mês, a academia poderá escolher entre:
+
+- **Antecipar:** utilizar o último dia do mês.
+- **Postergar:** utilizar o primeiro dia do mês seguinte.
+
+Exemplo: uma matrícula com vencimento no dia 31 terá seu vencimento em 28 ou 29 de fevereiro, conforme a regra de antecipação, ou em 1º de março, conforme a regra de postergação.
+
+A regra escolhida deverá ser registrada nas condições financeiras da matrícula e preservada para o histórico contratual.
+
+### 14.7 Vencimentos em finais de semana e feriados
+
+A academia poderá configurar como o sistema deverá tratar vencimentos que coincidam com sábados, domingos ou feriados:
+
+- **Manter a data original:** o vencimento permanece na data inicialmente calculada.
+- **Próximo dia útil:** o vencimento será transferido automaticamente para o próximo dia útil.
+
+A identificação de feriados deverá considerar, futuramente, os calendários nacionais, estaduais e municipais correspondentes à localização da academia.
+
+A regra escolhida deverá ser registrada nas condições financeiras da matrícula e aplicada aos vencimentos futuros, sem alterar cobranças já geradas.
+
+### 14.8 Alterações nas condições financeiras durante a renovação
+
+Durante a renovação de uma matrícula, a academia poderá revisar e alterar as condições financeiras do novo período contratual, incluindo:
+
+- Dia e modelo de vencimento.
+- Política de cobrança do primeiro período.
+- Tratamento de vencimentos em dias inexistentes no mês.
+- Tratamento de vencimentos em finais de semana e feriados.
+- Valores e demais condições comerciais do novo contrato.
+
+As novas condições serão aplicadas exclusivamente ao período renovado.
+
+O período contratual anterior deverá preservar integralmente suas condições originais, cobranças e histórico financeiro.
+
+### 14.9 Renovação automática de matrículas
+
+Cada academia poderá configurar se as matrículas terão renovação automática, sendo essa opção habilitada por padrão.
+
+Quando a renovação automática estiver habilitada:
+- Ao término do período contratual, o sistema deverá gerar um novo período para a mesma matrícula.
+- O histórico dos períodos anteriores deverá ser preservado.
+- A matrícula continuará vinculada ao mesmo aluno.
+- As condições do novo período deverão ser registradas individualmente.
+
+Quando a renovação automática estiver desabilitada:
+- Ao término do período contratual, a matrícula deverá mudar automaticamente para o status Encerrada.
+- O cadastro do aluno e todo o histórico da matrícula deverão ser preservados.
+
+A configuração deverá ser respeitada pelo sistema sem alterar períodos contratuais anteriores.  
+
+### 14.10 Política de preços na renovação automática
+
+A academia poderá configurar como os preços serão tratados durante as renovações automáticas:
+
+- **Manter preço anterior:** o novo período contratual preservará o valor praticado no período anterior.
+- **Aplicar preço vigente:** o novo período utilizará o preço atualmente configurado para o plano na data da renovação.
+
+A política aplicada, o valor anterior e o novo valor deverão ser registrados no histórico contratual.
+
+Alterações futuras nos preços ou nas configurações da academia não deverão modificar períodos contratuais anteriores nem cobranças já geradas.
+
+### 14.11 Comunicação de reajuste na renovação automática
+
+Quando uma renovação automática resultar em aumento de preço, o sistema deverá comunicar o aluno ou responsável financeiro antes da aplicação do novo valor.
+
+A academia poderá configurar a antecedência mínima da comunicação.
+
+O registro da comunicação deverá conter:
+- Data prevista da renovação.
+- Valor anterior e novo valor.
+- Data e horário do envio.
+- Destinatário.
+- Canal utilizado.
+- Status do envio.
+
+Caso a comunicação não possa ser enviada, o sistema deverá registrar a falha e gerar um alerta para a equipe da academia.
+
+O histórico das comunicações deverá ser preservado.
+
+### 14.12 Recusa de reajuste e cancelamento da renovação
+
+Quando uma renovação automática resultar em aumento de preço, o aluno ou responsável financeiro poderá solicitar o cancelamento da renovação antes da aplicação do novo valor.
+
+A academia poderá configurar o prazo máximo para essa solicitação, contado a partir da comunicação do reajuste.
+
+Quando o cancelamento for solicitado dentro do prazo:
+- A renovação automática deverá ser cancelada.
+- O contrato atual permanecerá válido até o término de sua vigência.
+- A matrícula será encerrada ao final do período contratual.
+- Não poderá ser aplicada multa por fidelidade decorrente da recusa ao novo período contratual.
+
+As obrigações financeiras e contratuais já existentes no período vigente deverão ser preservadas.
+
+O sistema deverá registrar a solicitação, a data, o responsável e o cancelamento da renovação no histórico da matrícula.
+
+### 14.13 Renovação automática e inadimplência
+
+A renovação contratual e a situação financeira da matrícula deverão ser tratadas de forma independente.
+
+Quando ocorrer uma renovação automática:
+- Um novo período contratual será criado.
+- A matrícula continuará vinculada ao mesmo aluno.
+- As cobranças do novo período serão geradas conforme as condições financeiras registradas.
+- A ausência de pagamento não deverá desfazer automaticamente a renovação contratual.
+
+Caso uma cobrança permaneça em aberto após o vencimento:
+- A situação financeira da matrícula deverá ser identificada como inadimplente.
+- As regras de bloqueio de acesso configuradas pela academia deverão ser respeitadas.
+- O contrato e o histórico da renovação deverão ser preservados.
+
+A inadimplência não deverá ser confundida com encerramento, cancelamento ou pausa da matrícula.
+
+### 14.14 Renovação manual de matrículas encerradas
+
+A academia poderá renovar manualmente uma matrícula que esteja com o status Encerrada.
+
+A renovação deverá ocorrer na mesma matrícula, sem criar um novo cadastro de matrícula.
+
+Durante o processo, será permitido:
+- Selecionar um novo plano e suas modalidades.
+- Definir novas datas de início e término.
+- Definir os valores e as condições comerciais.
+- Configurar as condições financeiras e os vencimentos.
+
+Antes da confirmação, o sistema deverá apresentar as novas condições para conferência.
+
+Após a confirmação:
+- Um novo período contratual será criado.
+- A matrícula voltará a ter vigência conforme a nova data de início.
+- Os períodos anteriores permanecerão preservados.
+- O histórico financeiro e contratual não poderá ser alterado.
+
+### 14.15 Independência entre matrículas do mesmo aluno
+
+Um aluno poderá possuir múltiplas matrículas simultâneas, e cada uma deverá funcionar de maneira independente.
+
+Cada matrícula terá seu próprio:
+- Plano e modalidades contratadas.
+- Período de vigência.
+- Status contratual.
+- Histórico de renovações.
+- Condições financeiras.
+- Cobranças e pagamentos.
+- Situação de inadimplência.
+- Regras de bloqueio de acesso.
+- Histórico de pausas, alterações e encerramentos.
+
+Pausar, encerrar, cancelar, renovar ou bloquear uma matrícula não deverá alterar automaticamente as demais matrículas do mesmo aluno.
+
+A situação geral do aluno deverá ser independente da situação individual de suas matrículas.
